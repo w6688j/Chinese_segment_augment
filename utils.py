@@ -7,9 +7,9 @@
 """
 
 
-def getStopwords():
+def getStopwords(dir):
     stopword = set()
-    with open('data/stopword.txt', 'r', encoding='UTF-8') as f:
+    with open(dir, 'r', encoding='UTF-8') as f:
         lines = f.readlines()
         for line in lines:
             stopword.add(line.strip())
