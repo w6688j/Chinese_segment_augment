@@ -11,12 +11,14 @@ import jieba
 # 自定义
 from model import TrieNode
 from utils import getStopwords, loadWords, generate_ngram, saveModel, loadModel
+from selfModel.SnowNLPModel import SnowNLPModel
+from selfModel.ThulacModel import ThulacModel
 
 
 def loadDate(fileName, stopwords):
     # 加载数据集
     data = []
-    with open(fileName, 'r') as f:
+    with open(fileName, 'r', encoding='UTF-8') as f:
         lines = f.readlines()
         for line in lines:
             line = line.strip()
@@ -69,14 +71,27 @@ if __name__ == "__main__":
     print('#############################')
     for word, score in add_word.items():
         print(word + ' ---->  ', score)
-    print('#############################')
+    print('#############################\n')
 
     # 前后效果对比
     test = '蔡英文在昨天应民进党当局的邀请，准备和陈时中一道前往世界卫生大会，和谈有关九二共识问题'
-    print('添加前：')
-    print("".join([(x + '/ ') for x in jieba.cut(test, cut_all=False) if x not in stopwords]))
 
+    # Jieba
+    print('jieba：')
+    print("".join([(x + '/ ') for x in jieba.cut(test, cut_all=False) if x not in stopwords]))
+    print('\n')
+
+    # SnowNLP
+    SnowNLPModel = SnowNLPModel(test, stopwords)
+    SnowNLPModel.run()
+
+    # Thulac
+    ThulacModel = ThulacModel(test, stopwords)
+    ThulacModel.run()
+
+    # 互信息、信息熵
     for word, score in add_word.items():
         jieba.add_word(word)
-    print("添加后：")
+    print("互信息、信息熵：")
     print("".join([(x + '/ ') for x in jieba.cut(test, cut_all=False) if x not in stopwords]))
+    print('\n')
