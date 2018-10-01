@@ -56,6 +56,6 @@ if __name__ == "__main__":
     TrieModel = TrieModel(test, stopwords, {
         'rootDir': 'E:\Projects\PyCharmProjects\Gitee\Chinese_segment_augment\data\\root.pkl',
         'dictDir': 'E:\Projects\PyCharmProjects\Gitee\Chinese_segment_augment\data\dict.txt',
-        'demoDir': 'E:\Projects\PyCharmProjects\Gitee\Chinese_segment_augment\data\demo.txt'
+        'demoDir': 'E:\Projects\PyCharmProjects\Gitee\Chinese_segment_augment\data\electric.txt'
     })
     TrieModel.run()
